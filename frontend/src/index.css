@@ -1,13 +1,60 @@
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #000; 
+  color: white; 
+  font-family: Arial, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.dashboard{
+  padding: 30px;
+}
+
+.applications-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+  gap: 25px;
+}
+.card{
+  background-color:  #36454F;
+  color: whitesmoke;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: 0.3s;                      
+}
+
+.card:hover{
+  transform: translateY(-5px);
+}
+
+.notes{
+  margin-top: 10px;
+  font-size: 0.9rem;
+  opacity: 0.8
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.applied {
+  background: #1f6feb;
+}
+
+.interview {
+  background: #d29922;
+}
+
+.rejected {
+  background: #da3633;
+}
+
+.offer {
+  background: #238636;
 }

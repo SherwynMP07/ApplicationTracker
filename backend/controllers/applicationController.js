@@ -1,4 +1,4 @@
-import { createApplication, getApplicationsByUser } from "../models/applicationModel";
+import { createApplication, getApplicationsByUser ,deleteApplication} from "../models/applicationModel.js";
 
 export const addApplication = async (req,res)=>{
     try{
@@ -17,7 +17,7 @@ export const addApplication = async (req,res)=>{
 export const getApplications = async(req,res)=>{
     try{
         const userId= req.user.userId;
-        const applications = await getApplications(userId);
+        const applications = await getApplicationsByUser(userId);
         res.status(200).json(applications);
     }
     catch(error){
@@ -25,7 +25,7 @@ export const getApplications = async(req,res)=>{
     }
 }
 
-export const fetchSingleApplication = async(res,req)=>{
+export const fetchSingleApplication = async(req,res)=>{
     try{
         const app= getApplicationsByUser(req.params.id , req.user.userId);
         if (!app) {
