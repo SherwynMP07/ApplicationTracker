@@ -1,4 +1,4 @@
-export default function ApplicationCard({ app }) {
+export default function ApplicationCard({ app, openEdit, deleteApp }) {
 
   const getStatusClass = (status)=>{
     switch(status){
@@ -13,6 +13,12 @@ export default function ApplicationCard({ app }) {
       default:
         return "status";
     }
+  }
+  const formatDate = (date)=>{
+    if(!date){
+      return "N/A";
+    }
+    return new Date(date).toLocaleDateString();
   }
   return (
     <div className="card">
@@ -35,12 +41,12 @@ export default function ApplicationCard({ app }) {
       </p>
 
       <p>
-        <strong>Applied:</strong> {app.applied_date}
+        <strong>Applied:</strong> {formatDate(app.applied_date)}
       </p>
 
       {app.followup_date && (
         <p>
-          <strong>Follow Up:</strong> {app.followup_date}
+          <strong>Follow Up:</strong> {formatDate(app.followup_date)}
         </p>
       )}
 
@@ -53,6 +59,11 @@ export default function ApplicationCard({ app }) {
       {app.notes && (
         <p className="notes"> 📝 {app.notes}</p>
       )}
+
+      <div className="card-actions">
+        <button className="edit-btn" onClick={() => openEdit(app)}>Edit</button>
+        <button className="delete-btn" onClick={() => deleteApp(app.id)}>Delete</button>
+      </div>
 
     </div>
   );

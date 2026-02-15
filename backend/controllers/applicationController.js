@@ -1,4 +1,4 @@
-import { createApplication, getApplicationsByUser ,deleteApplication} from "../models/applicationModel.js";
+import { createApplication, getApplicationsByUser ,deleteApplication, updateApplication} from "../models/applicationModel.js";
 
 export const addApplication = async (req,res)=>{
     try{
