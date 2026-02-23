@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 
 import pool from "./config/db.js";
-import authRoutes from "./routes/authroutes.js"
+import authRoutes from "./routes/authroutes.js";
+console.log("DATABASE_URL at runtime:", process.env.DATABASE_URL);
 import applicationRoutes from "./routes/applicationRoutes.js";
 
 const PORT= process.env.PORT || 5000;
