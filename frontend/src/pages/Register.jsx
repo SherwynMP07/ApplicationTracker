@@ -23,14 +23,14 @@ export default function Register(){
         }
         catch(err){
             console.error(err);
-            toast.error("Registration failed");
+            toast.error("Registration failed. Please verify your credentials.");
         }
     };
 
     return (
         <div className="auth-page">
             <div className="auth-card">
-                <h2>Register</h2>
+                <h2 className="reg-loginh">Register</h2>
                 <form onSubmit={handleSubmit} className="auth-form">
                     <input name="name" placeholder="Name" onChange={handleChange} />
                     <input name="email" placeholder="Email" onChange={handleChange} />

@@ -30,7 +30,7 @@ export default function Login(){
     return(
         <div className="auth-page">
             <div className="auth-card">
-                <h2>Login</h2>
+                <h2 className="reg-loginh">Login</h2>
                 <form onSubmit={handleSubmit} className="auth-form">
                     <input name="email" placeholder="Email" onChange={handleChange}/>
                     <input name="password" placeholder="Password" type="password" onChange={handleChange}/>

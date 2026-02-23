@@ -39,7 +39,7 @@ export default function ApplicationModal({closeModal, refreshApps, editApp}){
     return(
         <div className="modal-overlay">
             <div className="modal">
-                <h2>Add Application</h2>
+                <h2 className="reg-loginh">Add Application</h2>
                 <form onSubmit={handleSubmit}>
                     <input
                         name="company"
