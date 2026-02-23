@@ -243,8 +243,11 @@ body {
   color: #8b949e;
 }
 
+
 .auth-form input {
-  width: 100%;
+  width: 90%;
+  max-width: 500px;
+  margin-left: 10px;
   margin-bottom: 12px;
   padding: 10px;
   border-radius: 8px;
@@ -253,9 +256,18 @@ body {
   color: #fff;
 }
 
+.auth-form input:-webkit-autofill,
+.auth-form input:-webkit-autofill:hover,
+.auth-form input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #0d1117 inset; /* same as your input background */
+  box-shadow: 0 0 0 1000px #0d1117 inset;
+  -webkit-text-fill-color: #fff;
+}
+
 .auth-form button {
-  width: 100%;
+  width: 90%;
   margin-top: 4px;
+  margin-left: 20px;
 }
 
 .auth-switch {
@@ -274,42 +286,7 @@ body {
   gap: 12px;
   margin-top: 20px;
 }
-.chart-container {
-  margin: 20px 0;
-  display: flex;
-  justify-content: center;
-}
 
-.chart-card {
-  width: 100%;
-  max-width: 520px;
-  background: #020617;
-  border: 1px solid rgba(148,163,184,0.35);
-  border-radius: 16px;
-  padding: 16px 16px 8px;
-  box-shadow: 0 12px 35px rgba(15,23,42,0.9);
-}
-
-.chart-card h3 {
-  margin: 0 0 10px;
-  font-size: 1rem;
-  color: #e5e7eb;
-}
-
-.chart-inner {
-  width: 100%;
-}
-
-/* Recharts text defaults to black which looks messy on dark UI */
-.recharts-text,
-.recharts-legend-item-text {
-  fill: #e5e7eb;
-  color: #e5e7eb;
-}
-
-.recharts-default-legend {
-  margin-top: 6px !important;
-}
 .loading {
   min-height: 100vh;
   display: flex;
@@ -317,6 +294,31 @@ body {
   justify-content: center;
   font-size: 1.2rem;
   color: #8b949e;
+}
+
+.modal input,
+.modal textarea,
+.modal select {
+  outline: none;
+  font-size: 0.95rem;
+  width: 90%;
+  margin-left: 10px;
+}
+
+.modal input:focus,
+.modal textarea:focus,
+.modal select:focus {
+  border-color: #1f6feb;
+  box-shadow: 0 0 0 1px rgba(31, 111, 235, 0.35);
+}
+
+.modal select {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  background: #020617;
+  color: #e5e7eb;
 }
 
 @media (max-width: 768px) {
@@ -333,12 +335,8 @@ body {
     align-items: flex-start;
     gap: 10px;
   }
+}
 
-  .chart-container {
-    justify-content: flex-start;
-  }
-
-  .chart-card {
-    max-width: 100%;
-  }
+.reg-loginh{
+  text-align: center;
 }
