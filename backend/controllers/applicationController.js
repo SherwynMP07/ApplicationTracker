@@ -27,7 +27,7 @@ export const getApplications = async(req,res)=>{
 
 export const fetchSingleApplication = async(req,res)=>{
     try{
-        const app= getApplicationsByUser(req.params.id , req.user.userId);
+        const app= await getApplicationsById(req.params.id , req.user.userId);
         if (!app) {
             return res.status(404).json({ message: "Application not found" });
         }

@@ -1,14 +1,15 @@
 import { useState } from "react";
 import api from "../api/api.js";
+import { toast } from "react-toastify";
 
-export default function ApplicationModal({closeModal, resfreshApps, editApp}){
+export default function ApplicationModal({closeModal, refreshApps, editApp}){
     const [form, setForm] = useState(editApp || {
         company: "",
         role: "",
         location: "",
+        salary: "",
         status: "Applied",
         applied_date: "",
-        followup_date: "",
         notes: ""
     });
 
@@ -19,14 +20,21 @@ export default function ApplicationModal({closeModal, resfreshApps, editApp}){
         e.preventDefault();
         try{
             if (editApp) {
-            await api.put(`/applications/${editApp.id}`, form);
+                await api.put(`/applications/${editApp.id}`, form);
+                toast.success("Application updated successfully");
             } else {
-            await api.post("/applications", form);
+                await api.post("/applications", form);
+                toast.success("Application added successfully");
             }
+
+            await refreshApps();
+            closeModal();
         }
         catch(err){
             console.error(err);
+            toast.error("Failed to save application");
         }
+
     }
     return(
         <div className="modal-overlay">
@@ -36,6 +44,7 @@ export default function ApplicationModal({closeModal, resfreshApps, editApp}){
                     <input
                         name="company"
                         placeholder="Company"
+                        value={form.company}
                         onChange={handleChange}
                         required
                     />
@@ -43,6 +52,7 @@ export default function ApplicationModal({closeModal, resfreshApps, editApp}){
                     <input
                         name="role"
                         placeholder="Role"
+                        value={form.role}
                         onChange={handleChange}
                         required
                     />
@@ -50,10 +60,18 @@ export default function ApplicationModal({closeModal, resfreshApps, editApp}){
                     <input
                         name="location"
                         placeholder="Location"
+                        value={form.location}
                         onChange={handleChange}
                     />
 
-                    <select name="status" onChange={handleChange}>
+                    <input
+                        name="salary"
+                        placeholder="Salary (optional)"
+                        value={form.salary || ""}
+                        onChange={handleChange}
+                    />
+
+                    <select name="status" value={form.status} onChange={handleChange}>
                         <option>Applied</option>
                         <option>Interview</option>
                         <option>Offer</option>
@@ -63,20 +81,23 @@ export default function ApplicationModal({closeModal, resfreshApps, editApp}){
                     <input
                         type="date"
                         name="applied_date"
+                        value={form.applied_date || ""}
                         onChange={handleChange}
                     />
 
                     <textarea
                         name="notes"
                         placeholder="Notes"
+                        value={form.notes}
                         onChange={handleChange}
                     />
 
                     <div className="modal-actions">
-                        <button type="submit">Save</button>
-                        <button type="button" onClick={closeModal}>Cancel</button>
+                        <button className="btn primary-btn" type="submit">Save</button>
+                        <button className="btn secondary-btn" type="button" onClick={closeModal}>Cancel</button>
                     </div>
                 </form>
+
             </div>
         </div>
     );

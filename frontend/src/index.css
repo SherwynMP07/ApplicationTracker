@@ -1,13 +1,15 @@
 
 body {
   margin: 0;
-  background-color: #000; 
-  color: white; 
-  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top left, #111827 0, #020617 45%, #000000 100%);
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .dashboard{
   padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .applications-grid{
@@ -16,12 +18,13 @@ body {
   gap: 25px;
 }
 .card{
-  background-color:  #36454F;
-  color: whitesmoke;
-  border-radius: 20px;
+  background:  #111827;
+  color: #f9fafb;
+  border-radius: 18px;
   padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: 0.3s;                      
+  box-shadow: 0 10px 30px rgba(15,23,42,0.8);
+  border: 1px solid rgba(148,163,184,0.25);
+  transition: 0.25s transform, 0.25s box-shadow;                      
 }
 
 .card:hover {
@@ -68,11 +71,12 @@ body {
 }
 
 .stat-box{
-  background: #161b22;
-  border-radius: 10px;
+  background: #020617;
+  border-radius: 16px;
   padding: 20px;
   text-align: center;
-  border: 1px solid #30363d;
+  border: 1px solid rgba(148,163,184,0.35);
+  box-shadow: 0 12px 35px rgba(15,23,42,0.9);
 }
 
 .stat-box h3 {
@@ -115,6 +119,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal {
@@ -124,6 +129,13 @@ body {
   width: 350px;
 }
 
+.modal-actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 .modal input,
 .modal textarea,
 .modal select {
@@ -131,5 +143,202 @@ body {
   margin-bottom: 10px;
   padding: 8px;
   border-radius: 6px;
+  border: 1px solid #30363d;
+  background: #020617;
+  color: #e5e7eb;
+}
+.dashboard select {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #30363d;
+}
+.search-bar {
+  padding: 10px ;
+  border-radius: 999px;
+  border: 1px solid #30363d;
+  margin: 0;
+  width: 260px;
+  background: #020617;
+  color: #e5e7eb;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.dashboard-subtitle {
+  margin-top: 4px;
+  color: #8b949e;
+  font-size: 0.9rem;
+}
+
+.dashboard-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.filters-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
   border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primary-btn {
+  background: #1f6feb;
+  color: #fff;
+}
+
+.secondary-btn {
+  background: transparent;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  background: #161b22;
+  padding: 32px 28px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.auth-card h1,
+.auth-card h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.auth-subtitle {
+  margin-bottom: 24px;
+  color: #8b949e;
+}
+
+.auth-form input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  background: #0d1117;
+  color: #fff;
+}
+
+.auth-form button {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.auth-switch {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: #8b949e;
+}
+
+.auth-switch a {
+  color: #58a6ff;
+}
+
+.landing-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+.chart-container {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.chart-card {
+  width: 100%;
+  max-width: 520px;
+  background: #020617;
+  border: 1px solid rgba(148,163,184,0.35);
+  border-radius: 16px;
+  padding: 16px 16px 8px;
+  box-shadow: 0 12px 35px rgba(15,23,42,0.9);
+}
+
+.chart-card h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  color: #e5e7eb;
+}
+
+.chart-inner {
+  width: 100%;
+}
+
+/* Recharts text defaults to black which looks messy on dark UI */
+.recharts-text,
+.recharts-legend-item-text {
+  fill: #e5e7eb;
+  color: #e5e7eb;
+}
+
+.recharts-default-legend {
+  margin-top: 6px !important;
+}
+.loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #8b949e;
+}
+
+@media (max-width: 768px) {
+  .applications-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .chart-container {
+    justify-content: flex-start;
+  }
+
+  .chart-card {
+    max-width: 100%;
+  }
 }

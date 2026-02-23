@@ -44,12 +44,6 @@ export default function ApplicationCard({ app, openEdit, deleteApp }) {
         <strong>Applied:</strong> {formatDate(app.applied_date)}
       </p>
 
-      {app.followup_date && (
-        <p>
-          <strong>Follow Up:</strong> {formatDate(app.followup_date)}
-        </p>
-      )}
-
       {app.salary && (
         <p>
           <strong>Salary:</strong> {app.salary}

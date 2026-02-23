@@ -1,10 +1,11 @@
 import { useState } from "react";
 import api from "../api/api.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Login(){
     const[form, setForm] = useState({email:"", password:""})
-    const [error, setError] = useState("");
+
     const navigate = useNavigate();
 
     const handleChange = (e)=>{
@@ -17,20 +18,28 @@ export default function Login(){
         try{
             const res = await api.post("/auth/Login",form)
             localStorage.setItem("token", res.data.token);
+            toast.success("Login successful");
             navigate("/dashboard");
         }
         catch(err){
-            setError({message:"Server Error"});
+            console.error(err);
+            toast.error("Login failed. Please check your email and password.");
         }
+
     }
     return(
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <input name="email" placeholder="Email" onChange={handleChange}/>
-                <input name="password" placeholder="Password" type="password" onChange={handleChange}/>
-                <button>Login</button>
-            </form>
+        <div className="auth-page">
+            <div className="auth-card">
+                <h2>Login</h2>
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <input name="email" placeholder="Email" onChange={handleChange}/>
+                    <input name="password" placeholder="Password" type="password" onChange={handleChange}/>
+                    <button className="btn primary-btn">Login</button>
+                </form>
+                <p className="auth-switch">
+                    Don't have an account? <Link to="/register">Register</Link>
+                </p>
+            </div>
         </div>
     );
 

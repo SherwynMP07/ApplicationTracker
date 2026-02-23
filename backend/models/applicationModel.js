@@ -8,26 +8,25 @@ export const createApplication = async (data)=>{
     location,
     status,
     applied_date,
-    followup_date,
     notes,
-    job_link,
     salary,
-    contact_person
+    contact_email
   } = data;
 
-  const result = await pool.query("INSERT INTO applications (user_id, company, role, location, status, applied_date, followup_date, notes, job_link, salary, contact_person) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING *",    [
+  const result = await pool.query(
+    "INSERT INTO applications (user_id, company, role, location, status, applied_date, notes, salary, contact_email) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *",
+    [
       userId,
       company,
       role,
       location,
       status,
-      applied_date,
-      followup_date,
+      applied_date || null,
       notes,
-      job_link,
       salary,
-      contact_person
-    ]);
+      contact_email
+    ]
+  );
     return result.rows[0];
 }
 
@@ -45,8 +44,8 @@ export const updateApplication = async (id, userId, data) => {
   const query = `
     UPDATE applications
     SET company=$1, role=$2, location=$3, status=$4,
-        followup_date=$5, notes=$6, salary=$7, contact_person=$8
-    WHERE id=$9 AND user_id=$10
+        notes=$5, salary=$6, contact_email=$7
+    WHERE id=$8 AND user_id=$9
     RETURNING *;
   `;
 
@@ -55,10 +54,9 @@ export const updateApplication = async (id, userId, data) => {
     data.role,
     data.location,
     data.status,
-    data.followup_date,
     data.notes,
     data.salary,
-    data.contact_person,
+    data.contact_email,
     id,
     userId
   ];
