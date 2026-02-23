@@ -3,7 +3,7 @@
 A small web app I built to keep track of my job applications and to keep all the important details in one place.
 The goal was to make something simple, fast and informative, with a clean UI that’s easy to scan.
 
-You can:
+### You can:
 - Create, edit, view and delete job applications
 - Track things like company, role, status, dates and notes
 - Filter by status, company and dates to quickly find what you need
