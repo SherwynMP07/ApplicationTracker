@@ -41,7 +41,11 @@ export default function Register(){
                     <input name="name" placeholder="Name" onChange={handleChange} />
                     <input name="email" placeholder="Email" onChange={handleChange} />
                     <input name="password" placeholder="Password" type="password" onChange={handleChange} />
-                    <button className="btn primary-btn" disabled={isSubmitting}>
+                    <button
+                        className="btn primary-btn"
+                        disabled={isSubmitting}
+                        style={{ cursor: isSubmitting ? "not-allowed" : "pointer" }}
+                    >
                         {isSubmitting ? "Registering..." : "Register"}
                     </button>
                 </form>
