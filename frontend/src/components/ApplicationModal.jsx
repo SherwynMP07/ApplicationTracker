@@ -83,6 +83,7 @@ export default function ApplicationModal({closeModal, refreshApps, editApp}){
                         name="applied_date"
                         value={form.applied_date || ""}
                         onChange={handleChange}
+                        className="date-input"
                     />
 
                     <textarea
