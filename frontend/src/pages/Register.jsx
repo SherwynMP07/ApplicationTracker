@@ -26,7 +26,11 @@ export default function Register(){
         }
         catch(err){
             console.error(err);
-            toast.error("Registration failed. Please verify your credentials.");
+            if (err.code === "ECONNABORTED"){
+                toast.error("Server is waking up. Please try again in a few seconds.");
+            } else {
+                toast.error("Registration failed. Please verify your credentials.");
+            }
         }
         finally {
             setIsSubmitting(false);

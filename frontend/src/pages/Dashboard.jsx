@@ -15,6 +15,8 @@ export default function Dashboard(){
     const [filter, setFilter] = useState("All");
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState("Newest");
+    const [currentPage, setCurrentPage] = useState(1);
+
     const navigate = useNavigate();
     const handleLogout = ()=>{
         localStorage.removeItem("token");
@@ -33,6 +35,8 @@ export default function Dashboard(){
             toast.error("Failed to delete application");
         }
     };
+    const APPS_PER_PAGE = 4;
+
     const filteredAndSortedApps = useMemo(() => {
         const statusFiltered = applications.filter(app => {
             if (filter === "All") return true;
@@ -56,6 +60,10 @@ export default function Dashboard(){
         });
         }, [applications, filter, search, sort]);
 
+    const totalPages = Math.max(1, Math.ceil(filteredAndSortedApps.length / APPS_PER_PAGE));
+    const startIndex = (currentPage - 1) * APPS_PER_PAGE;
+    const currentApps = filteredAndSortedApps.slice(startIndex, startIndex + APPS_PER_PAGE);
+
     const openEdit = (app) => {
         setEditApp(app);
         setShowModal(true);
@@ -67,7 +75,6 @@ export default function Dashboard(){
         offer: applications.filter(a => a.status === "Offer").length,
         rejected: applications.filter(a => a.status === "Rejected").length
     }
-
 
     const fetchApplications = async ()=>{
         try{
@@ -86,6 +93,10 @@ export default function Dashboard(){
     useEffect(()=>{
         fetchApplications();
     },[]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [filter, search, sort]);
     
     if (loading) {
         return <div className="loading">Loading applications...</div>;
@@ -167,10 +178,32 @@ export default function Dashboard(){
                 {filteredAndSortedApps.length === 0 && (
                     <p>No applications found. Add one to get started.</p>
                 )}
-                {filteredAndSortedApps.map((app)=>{
+                {currentApps.map((app)=>{
                    return <ApplicationCard key={app.id} app={app} openEdit={openEdit} deleteApp={handleDeleteClick}/>
                 })}
             </div>
+
+            {filteredAndSortedApps.length > APPS_PER_PAGE && (
+                <div className="pagination">
+                    <button
+                        className="btn secondary-btn"
+                        onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+                    <span className="pagination-info">
+                        Page {currentPage} of {totalPages}
+                    </span>
+                    <button
+                        className="btn secondary-btn"
+                        onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
+                </div>
+            )}
             {deleteId && (
                 <ConfirmModal
                     message="Delete this application?"

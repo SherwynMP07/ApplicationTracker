@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 export default function Login(){
     const[form, setForm] = useState({email:"", password:""})
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const navigate = useNavigate();
 
@@ -15,6 +16,8 @@ export default function Login(){
     }
     const handleSubmit = async (e)=>{
         e.preventDefault();
+        if (isSubmitting) return;
+        setIsSubmitting(true);
         try{
             const res = await api.post("/auth/Login",form)
             localStorage.setItem("token", res.data.token);
@@ -23,10 +26,18 @@ export default function Login(){
         }
         catch(err){
             console.error(err);
-            toast.error("Login failed. Please check your email and password.");
+            if (err.code === "ECONNABORTED"){
+                toast.error("Server is waking up. Please try again in a few seconds.");
+            } else {
+                toast.error("Login failed. Please check your email and password.");
+            }
+        }
+        finally{
+            setIsSubmitting(false);
         }
 
     }
+
     return(
         <div className="auth-page">
             <div className="auth-card">
@@ -34,8 +45,15 @@ export default function Login(){
                 <form onSubmit={handleSubmit} className="auth-form">
                     <input name="email" placeholder="Email" onChange={handleChange}/>
                     <input name="password" placeholder="Password" type="password" onChange={handleChange}/>
-                    <button className="btn primary-btn">Login</button>
+                    <button
+                        className="btn primary-btn"
+                        disabled={isSubmitting}
+                        style={{ cursor: isSubmitting ? "not-allowed" : "pointer" }}
+                    >
+                        {isSubmitting ? "Logging in..." : "Login"}
+                    </button>
                 </form>
+
                 <p className="auth-switch">
                     Don't have an account? <Link to="/register">Register</Link>
                 </p>
