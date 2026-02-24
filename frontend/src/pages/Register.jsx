@@ -26,7 +26,11 @@ export default function Register(){
         }
         catch(err){
             console.error(err);
-            toast.error("Registration failed. Please verify your credentials.");
+            if (err.code === "ECONNABORTED"){
+                toast.error("Server is waking up. Please try again in a few seconds.");
+            } else {
+                toast.error("Registration failed. Please verify your credentials.");
+            }
         }
         finally {
             setIsSubmitting(false);
@@ -41,7 +45,11 @@ export default function Register(){
                     <input name="name" placeholder="Name" onChange={handleChange} />
                     <input name="email" placeholder="Email" onChange={handleChange} />
                     <input name="password" placeholder="Password" type="password" onChange={handleChange} />
-                    <button className="btn primary-btn" disabled={isSubmitting}>
+                    <button
+                        className="btn primary-btn"
+                        disabled={isSubmitting}
+                        style={{ cursor: isSubmitting ? "not-allowed" : "pointer" }}
+                    >
                         {isSubmitting ? "Registering..." : "Register"}
                     </button>
                 </form>
